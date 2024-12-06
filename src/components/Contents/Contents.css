@@ -5,7 +5,7 @@
   
 }
 .title{
-width: 16vw;
+width: 15vw;
 font-size: 0.9rem;
 font-weight: 500;
 margin-bottom: 3%;
@@ -13,7 +13,7 @@ margin-bottom: 3%;
 
 .info{
 width:16vw;
-font-size: 0.75rem;
+font-size: 0.8rem;
 
 }
 .vid{
@@ -24,4 +24,9 @@ font-size: 0.75rem;
 .Channel{
     height: 3vh;
     display: flex;
+}
+
+.Video-thumb{
+    height: 17vh;
+    margin-bottom: 3%;
 }

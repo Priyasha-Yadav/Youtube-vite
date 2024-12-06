@@ -11,7 +11,7 @@ function Contents() {
 
         }, {
             id: 3, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-10.png?raw=true', title: 'My first UX Design case study - This got me my first job.',
-            description: 'Saptarshi Prakash', views: "48K views 1 • years ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true'
+            description: 'Saptarshi Prakash', views: "48K views 1 • 5years ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true'
 
         }, {
             id: 4, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-11.png?raw=true', title: "My Mix", views: "Lopamudra Mitra, Anupam Roy, and more"
@@ -55,7 +55,7 @@ function Contents() {
                 {videos.map((feed) => (
                     <div key={feed.id} className="vid">
 
-                        <img src={feed.img_url} alt={feed.title} />
+                        <img src={feed.img_url} alt={feed.title} className="Video-thumb" />
                         <div className='Channel'>
                             <div><img src={feed.channel} />
                             </div>
