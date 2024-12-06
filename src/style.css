@@ -14,3 +14,7 @@ h4{
   margin: 0 2% 4% 6%;
   opacity: 0.6;
 }
+.main{
+  display: flex;
+  background-color:#181818 ;
+}
