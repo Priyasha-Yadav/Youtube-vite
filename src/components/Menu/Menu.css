@@ -1,0 +1,54 @@
+.menu {
+    height: 100vh;
+    width: 18vw;
+    background-color: #2a2a2a;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.logo {
+    padding: 3%;
+}
+.hr{
+    border: none; 
+    height: 1px; 
+    background-color: white; 
+    opacity: 0.3;
+    margin: 12% 0;
+    
+  }
+  
+.logo img {
+
+    margin: 3% 3% 4% 5%;
+    background-size: contain;
+}
+
+.menu-content {
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 4.7%;
+
+
+
+}
+
+.menu-cont img {
+    margin-right: 6%;
+    margin-left: 7%;
+}
+
+.subscribes a {
+    display: flex;
+    align-items: center;
+}
+
+.subscribes a img {
+    height: 3vh;
+
+}
+
+.subscribes {
+    margin-top: 7%;
+}
