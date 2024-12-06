@@ -1,0 +1,27 @@
+.feed{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2% 0 0 2%;
+  
+}
+.title{
+width: 16vw;
+font-size: 0.9rem;
+font-weight: 500;
+margin-bottom: 3%;
+}
+
+.info{
+width:16vw;
+font-size: 0.75rem;
+
+}
+.vid{
+    margin-left: 2%;
+    margin-bottom: 8%;
+
+}
+.Channel{
+    height: 3vh;
+    display: flex;
+}

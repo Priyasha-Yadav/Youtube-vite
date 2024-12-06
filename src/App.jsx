@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './style.css'
-import Menu from './components/Menu/Menu.jsx'
 import MainContent from './components/MainContent/MainContent.jsx'
+import Menu from './components/Menu/Menu.jsx'
 
 
 function App() {
