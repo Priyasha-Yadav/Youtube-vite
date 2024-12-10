@@ -44,7 +44,7 @@ function Top({ setSearchQuery }) {
             onChange={handleSearchChange}  // Update local search query state on input change
             onKeyDown={handleKeyPress}  // Handle Enter key press
           />
-          <div className="search-icon" onClick={handleSearchSubmit}>
+          <div className="search-icon"   value={searchQuery} onClick={handleSearchSubmit}>
             <img
               src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/search.png?raw=true"
               alt="search icon"
