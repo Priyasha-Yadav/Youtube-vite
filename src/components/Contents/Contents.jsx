@@ -1,75 +1,65 @@
-import './Contents.css'
+import { useEffect, useState } from 'react'; // Importing hooks
+import axios from 'axios';
+import './Contents.css';
+
 function Contents() {
-    const videos = [
-        {
-            id: 1, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-8.png?raw=true', title: 'Bulbuli | Coke Studio Bangla | Season One | RItu Raj X Nandita',
-            description: 'Coke Studio Bangla', views: "1.5M views • 2 days ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(1).png?raw=true'
+    const [videos, setVideos] = useState([]);
+    const [loading, setLoading] = useState(true); // Track loading state
+    const [error, setError] = useState(null); // Track errors
 
-        }, {
-            id: 2, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-9.png?raw=true', title: 'Infinix Note 12:       AMOLED    Helio G88 SoC!',
-            description: 'ATC Android ToTo Company', views: "42M views • 2 days ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(4).png?raw=true'
+    useEffect(() => {
+        // Fetching videos from the server
+        const fetchVideos = async () => {
+            try {
+                const response = await axios.get('https://yt-api-jw2k.onrender.com/api/videos');
+                setVideos(response.data);
+                setLoading(false);  
+            } catch (error) {
+                console.error('Error fetching videos:', error);
+            }
+        };
 
-        }, {
-            id: 3, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-10.png?raw=true', title: 'My first UX Design case study - This got me my first job.',
-            description: 'Saptarshi Prakash', views: "48K views 1 • 5years ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true'
-
-        }, {
-            id: 4, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-11.png?raw=true', title: "My Mix", views: "Lopamudra Mitra, Anupam Roy, and more"
-        }, {
-            id: 5, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-4.png?raw=true', title: "UX Design - What is it? (From AJ&Smart)", description:'AJ&Smart', views: "150KM views • 3 years ago", channel:"https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(4).png?raw=true"
-        },
-        {
-            id: 6, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-5.png?raw=true', title: 'Mix - Mombati | Mohon Sharif | Dhakaiya Dose | Mahib Ahsan ft Anika',
-        
-
-        }, {
-            id: 7, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-6.png?raw=true', title: '  Nadir on the goto| 48 VISA-FREE',
-            description: '', channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(5).png?raw=true',description: 'Nadir On the Go', views: "1.7M views • 1 years ago",
-
-        }, {
-            id: 8, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-7.png?raw=true', title: '14 Advanced Tips to Design FASTER in Figma',
-            description: 'Mizko', views: "53K views • 1 years ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(6).png?raw=true'
-
-        }, {
-            id: 9, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail.png?raw=true', title: "My Mix", views: "Lopamudra Mitra, Anupam Roy, and More"
-        },
-        {
-            id: 10, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-1.png?raw=true', title: 'Bulbuli | Coke Studio Bangla | Season One | RItu RajX Nandita',
-            description: 'Coke Studio Bangla', views: "1.5M views 2 days ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(1).png?raw=true'
-
-        }, {
-            id: 11, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-2.png?raw=true', title: 'Infinix Note 12: <br> AMOLED    Helio G88 SoC!',
-            description: 'ATC Android ToTo Company', views: "42M views 2 days ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(4).png?raw=true'
-
-        }, {
-            id: 12, img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-3.png?raw=true', title: 'My first UX Design case study - This got me my first job.',
-            description: 'Saptarshi Prakash', views: "48K views 1 years ago", channel: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(1).png?raw=true'
-
-        }
-
-
-    ]
-    return (
-        <>
+        fetchVideos();
+    }, []); 
+    if (loading) {
+        return (
             <div className="feed">
-                {videos.map((feed) => (
-                    <div key={feed.id} className="vid">
+                <p>Loading videos...</p>
+            </div>
+        );
+    }
 
+    if (error) {
+        return (
+            <div className="feed">
+                <p>{error}</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="feed">
+            {videos.length > 0 ? (
+                videos.map((feed) => (
+                    <div key={feed.id} className="vid">
                         <img src={feed.img_url} alt={feed.title} className="Video-thumb" />
-                        <div className='Channel'>
-                            <div><img src={feed.channel} />
+                        <div className="Channel">
+                            <div>
+                                {feed.channel && <img src={feed.channel} alt="channel" />} {/* Check if channel exists */}
                             </div>
                             <div>
-
                                 <p className="title">{feed.title}</p>
-                                <p className="info">{feed.description}</p>
-                                <p className="info">{feed.views}</p>
-                            </div></div>
+                                <p className="info">{feed.description || 'No description available'}</p>
+                                <p className="info">{feed.views || 'Views not available'}</p>
+                            </div>
+                        </div>
                     </div>
-                ))}
-            </div>
-        </>
+                ))
+            ) : (
+                <p>No videos found.</p>
+            )}
+        </div>
     );
 }
 
-export default Contents
+export default Contents;
