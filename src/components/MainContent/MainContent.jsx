@@ -1,17 +1,16 @@
-import './MainContent.css'
+import React from 'react';
+import './MainContent.css';
+import Top from '../Top/Top.jsx';
+import Contents from '../Contents/Contents.jsx';
 
-import Contents from '../Contents/Contents.jsx'
-import Top from '../Top/Top.jsx'
-function MainContent(){
-    return(
-        <>
-       <div className='mainc'>
-   
-        <Top />  
-      <Contents />
-      </div>
-        </>
-    )
+function MainContent({ searchQuery, setSearchQuery }) {
+  return (
+    <div className='mainc'>
+      {/* Pass setSearchQuery as a prop to Top */}
+      <Top searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Contents searchQuery={searchQuery} />
+    </div>
+  );
 }
 
-export default MainContent
+export default MainContent;
