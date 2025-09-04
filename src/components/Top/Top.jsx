@@ -2,36 +2,33 @@ import React, { useState } from 'react';
 import './Top.css';
 
 function Top({ setSearchQuery }) {
-  const [searchQuery, setLocalSearchQuery] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
-  const handleSearchChange = (event) => {
-    setLocalSearchQuery(event.target.value);  // Update the local state as the user types
-  };
-
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();  // Prevent form submission
-    setSearchQuery(searchQuery);  // Pass the local search query to the parent (MainContent)
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      handleSearchSubmit(event);  // Trigger the search on Enter key press
-    }
-  };
   const categories = [
-    { title: 'All' },
-    { title: 'Cook Studio' },
-    { title: 'UX' },
-    { title: 'Case Study' },
-    { title: 'Music' },
-    { title: 'Bangla Lofi' },
-    { title: 'Tour' },
-    { title: 'Saintmartin' },
-    { title: 'Tech' },
-    { title: 'iPhone 13' },
-    { title: 'User Interface Design' },
-    { title: 'Comput' }
-];
+    { title: 'All', query: '' },
+    { title: 'Cook Studio', query: 'Cook Studio' },
+    { title: 'UX', query: 'UX' },
+    { title: 'Case Study', query: 'Case Study' },
+    { title: 'Music', query: 'Music' },
+    { title: 'Bangla Lofi', query: 'Bangla Lofi' },
+    { title: 'Tour', query: 'Tour' },
+    { title: 'Saintmartin', query: 'Saintmartin' },
+    { title: 'Tech', query: 'Tech' },
+    { title: 'iPhone 13', query: 'iPhone 13' },
+    { title: 'User Interface Design', query: 'User Interface Design' },
+    { title: 'Computer', query: 'Computer' }
+  ];
+
+  const handleCategoryClick = (query) => {
+    setSearchInput(query);
+    setSearchQuery(query); // immediately send to parent
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    setSearchQuery(value); // live update parent as user types
+  };
 
   return (
     <>
@@ -40,11 +37,10 @@ function Top({ setSearchQuery }) {
           <input
             type="text"
             placeholder="Search"
-            value={searchQuery}  // Controlled input (value is bound to searchQuery)
-            onChange={handleSearchChange}  // Update local search query state on input change
-            onKeyDown={handleKeyPress}  // Handle Enter key press
+            value={searchInput}
+            onChange={handleInputChange}
           />
-          <div className="search-icon"   value={searchQuery} onClick={handleSearchSubmit}>
+          <div className="search-icon" onClick={() => setSearchQuery(searchInput)}>
             <img
               src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/search.png?raw=true"
               alt="search icon"
@@ -52,25 +48,27 @@ function Top({ setSearchQuery }) {
           </div>
         </div>
         <div className="user">
-                    <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/create.png?raw=true" alt="create icon" /></a>
-                    <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/more.png?raw=true" alt="more icon" /></a>
-                    <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/bell.png?raw=true" alt="notification bell" /></a>
-                    <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true" alt="user profile" /></a>
-                </div>
+          <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/create.png?raw=true" alt="create icon" /></a>
+          <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/more.png?raw=true" alt="more icon" /></a>
+          <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/bell.png?raw=true" alt="notification bell" /></a>
+          <a href="#"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true" alt="user profile" /></a>
+        </div>
+      </div>
+      <hr />
+      <div className="recommended">
+        <div className="categories">
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className="category-item"
+              onClick={() => handleCategoryClick(category.query)}
+            >
+              {category.title}
             </div>
-            <hr />
-            <div className="recommended">
-                <div className="categories">
-                    {categories.map((category, index) => (
-                        <div key={index} className="category-item">
-                            {category.title}
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <hr />
-
-     
+          ))}
+        </div>
+      </div>
+      <hr />
     </>
   );
 }

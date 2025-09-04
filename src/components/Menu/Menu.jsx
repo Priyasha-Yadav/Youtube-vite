@@ -1,101 +1,135 @@
-import './Menu.css'
+import { useState } from 'react';
+import './Menu.css';
 
-function Menu() {
-    const subscriptions = [
-        { id: 1, title: "Nadir On The Go", img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201.png?raw=true' }, {
-            id: 2, title: "Coke Studio Bangla", img_url: 'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(1).png?raw=true'
-        },
-{
-    id:3, title:"MKBHD", img_url:'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(2).png?raw=true'
-},
-{
-    id:4, title:"Figma", img_url:'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(3).png?raw=true'
-},
-{id:5, title:"ATC Android ToTo C...", img_url:'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(4).png?raw=true'},
-{
-    id:6, title:"Alux.com", img_url:'https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(5).png?raw=true'
-}
-    ]
-    return (
-        <>
-            <div className="menu">
-                <div className="logo">
-                    <a href="">
-                        <img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/hambarger.png?raw=true" alt="" />
+function Menu({ onMenuItemClick }) {
+  const [searchQuery, setSearchQuery] = useState(''); // State to hold current search query
 
-                        <img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Youtube%20logo.png?raw=true" alt="" />
-                    </a>
-                </div>
+  const handleMenuItemClick = (item) => {
+    setSearchQuery(item);
+    onMenuItemClick(item); // Pass the selected item to the parent component
+  };
 
-                <div className="menu-cont">
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/home.png?raw=true" alt="" /><span>Home</span></div>
-                    </a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/explore.png?raw=true" alt="" /><span>Explores</span></div>
-                    </a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/shorts.png?raw=true" alt="" /><span>Shorts</span></div></a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/subscription.png?raw=true" alt="" /><span>Subscriptions</span>
+  return (
+    <>
+      <div className="menu">
+        <div className="logo">
+          <a href="#">
+            <img
+              src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/hambarger.png?raw=true"
+              alt="hamburger icon"
+            />
+            <img
+              src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Youtube%20logo.png?raw=true"
+              alt="YouTube logo"
+            />
+          </a>
+        </div>
 
-
-
-                        </div> </a>
-
-
-
-                        <hr className='hr'/>
-                </div>
-                <div className="menu-cont">
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/library.png?raw=true" alt="" /><span>Library</span></div>
-                    </a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/history.png?raw=true" alt="" /><span>History</span></div>
-                    </a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/your_video.png?raw=true" alt="" /><span>Your Videos</span></div></a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/watch_later.png?raw=true" alt="" /><span>Watch later</span>
-
-
-                        </div> </a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/liked.png?raw=true" alt="" /><span>Liked videos</span>
-
-
-                        </div> </a>
-                    <a href="">
-                        <div className="menu-content"><img src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/down_arrow.png?raw=true" alt="" /><span>Show more</span>
-
-                          
-                        </div> </a>
-                    <hr className='hr'/>
-
-<div className="Subs">
-   <h4>SUBSCRIPTIONS</h4>
-{
-    subscriptions.map((subsc)=>(
-  
-<div key = {subsc.id} className='subscribes'>
-    <a href="">
-   <img src={subsc.img_url} alt={subsc.title} />
-   <p>{subsc.title}</p></a></div>
-    ))
-}
-</div>
-
-
-                </div>
-
+        <div className="menu-cont">
+          <a href="#" onClick={() => handleMenuItemClick('home')}>
+            <div className="menu-content">
+              <img
+                src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/home.png?raw=true"
+                alt="Home"
+              />
+              <span>Home</span>
             </div>
+          </a>
 
+          <a href="#" onClick={() => handleMenuItemClick('explore')}>
+            <div className="menu-content">
+              <img
+                src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/explore.png?raw=true"
+                alt="Explore"
+              />
+              <span>Explore</span>
+            </div>
+          </a>
 
+          <a href="#" onClick={() => handleMenuItemClick('shorts')}>
+            <div className="menu-content">
+              <img
+                src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/shorts.png?raw=true"
+                alt="Shorts"
+              />
+              <span>Shorts</span>
+            </div>
+          </a>
 
+          <a href="#" onClick={() => handleMenuItemClick('subscriptions')}>
+            <div className="menu-content">
+              <img
+                src="https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/subscription.png?raw=true"
+                alt="Subscriptions"
+              />
+              <span>Subscriptions</span>
+            </div>
+          </a>
+          <hr className="hr" />
+        </div>
 
-        </>
-    )
+        <div className="menu-cont">
+          <h4>Explore</h4>
+          <a href="#" onClick={() => handleMenuItemClick('trending')}>
+            <div className="menu-content">
+              <span>Trending</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('shopping')}>
+            <div className="menu-content">
+              <span>Shopping</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('music')}>
+            <div className="menu-content">
+              <span>Music</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('movies')}>
+            <div className="menu-content">
+              <span>Movies</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('live')}>
+            <div className="menu-content">
+              <span>Live</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('gaming')}>
+            <div className="menu-content">
+              <span>Gaming</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('news')}>
+            <div className="menu-content">
+              <span>News</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('sports')}>
+            <div className="menu-content">
+              <span>Sports</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('courses')}>
+            <div className="menu-content">
+              <span>Courses</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('fashion')}>
+            <div className="menu-content">
+              <span>Fashion & Beauty</span>
+            </div>
+          </a>
+          <a href="#" onClick={() => handleMenuItemClick('podcasts')}>
+            <div className="menu-content">
+              <span>Podcasts</span>
+            </div>
+          </a>
+          <hr className="hr" />
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Menu
+export default Menu;

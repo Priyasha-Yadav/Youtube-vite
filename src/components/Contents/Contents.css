@@ -1,32 +1,123 @@
-.feed{
+.feed {
     display: flex;
     flex-wrap: wrap;
-    margin: 2% 0 0 2%;
+    justify-content: space-around; /* Adjust to space out items better */
+    margin: 2% 0;
+}
+
+.vid {
+    margin: 1.5%;
+    /* Adjusted margin for better spacing */
+    transition: transform 0.3s;
+    cursor: pointer;
+    width: 30%;  /* Adjust width for larger thumbnails */
+    max-width: 400px;  /* Limit the maximum width for larger screens */
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+    overflow: hidden;
   
 }
-.title{
-width: 15vw;
-font-size: 0.9rem;
-font-weight: 500;
-margin-bottom: 3%;
+
+.vid:hover {
+    transform: scale(1.05);
 }
 
-.info{
-width:16vw;
-font-size: 0.8rem;
-
+.Video-thumb {
+    width: 100%;
+    height: 200px;  /* Increased size of thumbnails */
+    object-fit: cover; /* Ensure the image fills the space proportionally */
+    border-bottom: 4px solid #ccc; /* Add a border to separate the thumbnail from text */
 }
-.vid{
-    margin-left: 2%;
-    margin-bottom: 8%;
 
-}
-.Channel{
-    height: 3vh;
+.Channel {
+    padding: 15px;
     display: flex;
+    flex-direction: column;
 }
 
-.Video-thumb{
-    height: 17vh;
-    margin-bottom: 3%;
+.title {
+    font-size: 1.1rem;  /* Larger font for video titles */
+    font-weight: 600;
+   
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;  /* Ensures long titles are truncated */
+}
+
+.info {
+    font-size: 0.9rem;
+  
+    margin-bottom: 8px;
+}
+
+.end-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.end-buttons button {
+    background-color: #4d4949;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 1rem;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.end-buttons button:hover {
+    background-color: #888;
+}
+
+.end-buttons button:focus {
+    outline: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px; /* Max width for video player */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #555;
+}
+
+.iframe {
+    border-radius: 8px;
+    width: 100%;
+    height: 500px;
+    margin-top: 20px;
 }

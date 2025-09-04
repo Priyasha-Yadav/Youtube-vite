@@ -8,8 +8,7 @@ function App() {
 
   return (
     <div className="main">
-      <Menu />
-      {/* Pass the setSearchQuery function to MainContent */}
+      <Menu onMenuItemClick={setSearchQuery} />  {/* Pass setSearchQuery as onMenuItemClick */}
       <MainContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </div>
   );

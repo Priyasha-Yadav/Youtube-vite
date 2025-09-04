@@ -6,8 +6,9 @@ function Contents({ searchQuery }) {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const API_KEY = 'AIzaSyDoO5fm_qVrxdf7lDBi7c921LfJT71HoiU';
+  const [maxResults, setMaxResults] = useState(12);  // State to control maxResults
+  const [selectedVideoId, setSelectedVideoId] = useState(null); // State to store selected video ID
+  const API_KEY = 'AIzaSyCUBTaA9ubcOugfW7ZClua9tizLgdPBqQU';
   const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search';
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function Contents({ searchQuery }) {
       try {
         let response;
 
-        console.log("Fetching videos for query:", searchQuery);  // Debugging log for searchQuery
+        console.log("Fetching videos for query:", searchQuery);
 
         if (searchQuery.trim()) {
           const params = {
@@ -26,11 +27,12 @@ function Contents({ searchQuery }) {
             q: searchQuery,
             key: API_KEY,
             type: 'video',
+            maxResults: maxResults  // Use maxResults from state here
           };
 
           response = await axios.get(YOUTUBE_API_URL, { params });
 
-          console.log("API Response:", response);  // Log the full API response for debugging
+          console.log("API Response:", response);
 
           if (response.data.items && response.data.items.length > 0) {
             const videoData = response.data.items.map(item => ({
@@ -41,15 +43,15 @@ function Contents({ searchQuery }) {
               channel: item.snippet.channelTitle,
               views: 'N/A',
             }));
-            console.log("Fetched video data:", videoData);  // Log the video data
+            console.log("Fetched video data:", videoData);
             setVideos(videoData);
           } else {
             console.log("No videos found for query:", searchQuery);
-            setVideos([]);  // No results, set videos to an empty array
+            setVideos([]);
           }
         } else {
           response = await axios.get('https://yt-api-jw2k.onrender.com/api/videos');
-          console.log("Fallback videos:", response.data);  // Log the fallback data
+          console.log("Fallback videos:", response.data);
           setVideos(response.data);
         }
 
@@ -62,7 +64,7 @@ function Contents({ searchQuery }) {
     };
 
     fetchVideos();
-  }, [searchQuery]);
+  }, [searchQuery, maxResults]);  // Add maxResults as a dependency
 
   console.log('Loading:', loading);
   console.log('Videos:', videos);
@@ -76,33 +78,70 @@ function Contents({ searchQuery }) {
     return <div className="feed"><p>{error}</p></div>;
   }
 
+  // Handle video click to select a video and show the iframe
+  const handleVideoClick = (videoId) => {
+    setSelectedVideoId(videoId);
+  };
+
+  // Handle closing the popup
+  const closePopup = () => {
+    setSelectedVideoId(null);
+  };
+
   return (
-    <div className="feed">
-      {videos.length > 0 ? (
-        videos.map(feed => {
-          console.log('Rendering video:', feed);  // Log each video feed to check its structure
-          return (
-            <div key={feed.id} className="vid">
-              <img src={feed.img_url} alt={feed.title} className="Video-thumb" />
-              <div className="Channel">
-                <div>
-                  {feed.channel_img_url && (
-                    <img src={feed.channel_img_url} alt={feed.channel} className="Channel-thumb" />
-                  )}
-                </div>
-                <div>
-                  <p className="title">{feed.title}</p>
-                  <p className="info">{feed.description || 'No description available'}</p>
-                  <p className="info">{feed.views || 'Views not available'}</p>
+    <>
+      <div className="feed">
+        {videos.length > 0 ? (
+          videos.map(feed => {
+            console.log('Rendering video:', feed);
+            return (
+              <div key={feed.id} className="vid" onClick={() => handleVideoClick(feed.id)}>
+                <img src={feed.img_url} alt={feed.title} className="Video-thumb" />
+                <div className="Channel">
+                  <div>
+                    {feed.channel_img_url && (
+                      <img src={feed.channel_img_url} alt={feed.channel} className="Channel-thumb" />
+                    )}
+                  </div>
+                  <div>
+                    <p className="title">{feed.title}</p>
+                    <p className="info">{feed.description || 'No description available'}</p>
+                    <p className="info">{feed.views || 'Views not available'}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })
-      ) : (
-        <p>No videos found.</p>
+            );
+          })
+        ) : (
+          <p>No videos found.</p>
+        )}
+      </div>
+
+      {/* Video player (popup modal) */}
+      {selectedVideoId && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <button className="close-btn" onClick={closePopup}>X</button>
+            <iframe
+              className="iframe"
+              width="100%"
+              height="500"
+              src={`https://www.youtube.com/embed/${selectedVideoId}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Video Player"
+            ></iframe>
+          </div>
+        </div>
       )}
-    </div>
+
+      <div className="end-buttons">
+        <button type="button" onClick={() => setMaxResults(10)}>10</button>
+        <button type="button" onClick={() => setMaxResults(20)}>20</button>
+        <button type="button" onClick={() => setMaxResults(30)}>30</button>
+      </div>
+    </>
   );
 }
 
